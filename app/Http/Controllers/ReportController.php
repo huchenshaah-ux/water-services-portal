@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Support\VercelFeatures;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -84,7 +84,11 @@ class ReportController extends Controller
             $date = $request->get('date', now()->toDateString());
             $applications = Application::whereDate('application_date', $date)->get();
 
-            return Pdf::loadView($view, compact('applications', 'date'))->stream('report.pdf');
+            if (VercelFeatures::hasPdf()) {
+                return \Barryvdh\DomPDF\Facade\Pdf::loadView($view, compact('applications', 'date'))->stream('report.pdf');
+            }
+
+            return view($view, compact('applications', 'date'));
         }
 
         abort(404);

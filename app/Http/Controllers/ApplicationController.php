@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\User;
 use App\Services\AuditService;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Support\VercelFeatures;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApplicationController extends Controller
 {
@@ -101,17 +101,32 @@ class ApplicationController extends Controller
     public function pdf(Application $application)
     {
         $application->load('supervisor');
-        $pdf = Pdf::loadView('applications.pdf', compact('application'));
 
-        return $pdf->download("application-{$application->entry_no}.pdf");
+        if (VercelFeatures::hasPdf()) {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('applications.pdf', compact('application'));
+
+            return $pdf->download("application-{$application->entry_no}.pdf");
+        }
+
+        return view('applications.pdf', compact('application'));
     }
 
-    public function qr(Application $application)
+    public function qr(Application $application): RedirectResponse|Response
     {
         $url = route('applications.show', $application);
-        $qr = QrCode::format('svg')->size(200)->generate($url);
 
-        return response($qr)->header('Content-Type', 'image/svg+xml');
+        if (VercelFeatures::hasQrCode()) {
+            $qr = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(200)->generate($url);
+
+            return response($qr)->header('Content-Type', 'image/svg+xml');
+        }
+
+        return redirect()->away(
+            'https://api.qrserver.com/v1/create-qr-code/?'.http_build_query([
+                'size' => '200x200',
+                'data' => $url,
+            ])
+        );
     }
 
     private function validated(Request $request): array

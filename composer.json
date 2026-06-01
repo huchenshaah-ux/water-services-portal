@@ -2,23 +2,22 @@
     "name": "fenaka/water-services-portal",
     "type": "project",
     "description": "Water Services Portal - Admin Dashboard",
-    "keywords": ["laravel", "water-services", "adminlte"],
     "license": "MIT",
     "require": {
-        "php": "^8.3",
+        "php": "^8.2",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10",
-        "maatwebsite/excel": "^3.1",
-        "barryvdh/laravel-dompdf": "^3.0",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "laravel/tinker": "^2.10"
     },
     "require-dev": {
+        "barryvdh/laravel-dompdf": "^3.0",
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.18",
         "laravel/sail": "^1.37",
+        "maatwebsite/excel": "^3.1",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.5",
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^11.5",
+        "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "autoload": {
         "psr-4": {
@@ -38,15 +37,8 @@
             "@php artisan package:discover --ansi"
         ],
         "vercel": [
-            "@php -r \"if (!is_dir('bootstrap/cache')) mkdir('bootstrap/cache', 0755, true);\"",
-            "@php -r \"foreach (['storage/framework/cache/data','storage/framework/sessions','storage/framework/views','storage/logs'] as $d) { if (!is_dir($d)) mkdir($d, 0755, true); }\"",
+            "@php -r \"foreach (['bootstrap/cache','storage/framework/cache/data','storage/framework/sessions','storage/framework/views','storage/logs'] as $d) { if (!is_dir($d)) mkdir($d, 0755, true); }\"",
             "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
         ]
     },
     "extra": {
@@ -59,7 +51,6 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true,
             "php-http/discovery": true
         }
     },

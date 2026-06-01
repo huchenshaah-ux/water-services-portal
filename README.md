@@ -12,7 +12,7 @@ Modern AdminLTE-style dashboard for managing water service applications (Fenaka-
 | AdminLTE | 3 |
 | Bootstrap | 5 |
 | Chart.js | 4 |
-| Laravel Excel | 3.x |
+| Laravel Excel | 3.x (dev/local; CSV on Vercel) |
 
 ## Features
 
