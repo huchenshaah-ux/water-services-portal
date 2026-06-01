@@ -132,6 +132,13 @@ vercel.json        → PHP runtime + routes
 
 ## Fix HTTP 500 errors
 
+**Test diagnostics:** open `https://your-app.vercel.app/ping`  
+You should see JSON with `"vendor": true` and `"app_key_set": true`.
+
+**Vercel project settings:**
+- **Node.js version:** 18.x (Node 20 breaks vercel-php for many projects)
+- **Root directory:** `water-services-portal` if the repo is not at repo root
+
 Most 500s on Vercel are caused by missing env vars or wrong session/cache drivers.
 
 1. **Set `APP_KEY`** — required. Generate locally: `php artisan key:generate --show`
