@@ -1,0 +1,3 @@
+entry_no,application_date,applicant_name,id_number,contact_number,address,service_address,billing_address,service_category,status,fenaka_id,remarks
+WS-00051,2026-01-15,Ahmed Hassan,A123456,7912345,Male City,Male Service Area,Male Billing,new_connection,pending,FNK-51,Sample import row
+WS-00052,2026-02-01,Fathimath Ali,A654321,7923456,Addu City,Addu Service Area,Addu Billing,reconnection,approved,FNK-52,

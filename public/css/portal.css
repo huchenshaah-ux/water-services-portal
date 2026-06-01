@@ -1,0 +1,27 @@
+/* Water Services Portal - custom styles */
+.dark-mode,
+[data-theme="dark"] body {
+    background-color: #454d55;
+}
+
+[data-theme="dark"] .content-wrapper {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+[data-theme="dark"] .card {
+    background-color: #3d444b;
+    color: #fff;
+}
+
+.small-box .icon { top: 10px; }
+
+@media (max-width: 576px) {
+    .small-box h3 { font-size: 1.5rem; }
+    .table-responsive { font-size: 0.85rem; }
+}
+
+.btn-xs {
+    padding: 0.15rem 0.4rem;
+    font-size: 0.75rem;
+}
