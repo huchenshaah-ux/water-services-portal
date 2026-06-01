@@ -1,19 +1,12 @@
 {
   "version": 2,
   "framework": null,
-  "functions": {
-    "api/hello.php": {
-      "runtime": "vercel-php@0.6.2"
-    },
-    "api/ping.php": {
-      "runtime": "vercel-php@0.6.2"
-    },
-    "api/index.php": {
-      "runtime": "vercel-php@0.6.2",
-      "maxDuration": 60,
-      "memory": 1024
-    }
-  },
+  "builds": [
+    { "src": "api/hello.php", "use": "vercel-php@0.7.4" },
+    { "src": "api/ping.php", "use": "vercel-php@0.7.4" },
+    { "src": "api/index.php", "use": "vercel-php@0.7.4" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ],
   "routes": [
     { "src": "/hello", "dest": "/api/hello.php" },
     { "src": "/ping", "dest": "/api/ping.php" },

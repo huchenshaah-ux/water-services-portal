@@ -1,0 +1,26 @@
+name: Verify Composer build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  composer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, ctype, json, bcmath, openssl, pdo_mysql, zip, fileinfo
+          coverage: none
+
+      - name: Install dependencies (production)
+        env:
+          APP_KEY: base64:dGVzdGtleXRlc3RrZXl0ZXN0a2V5dGVzdGtleTEyMzQ1Ng==
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Smoke test autoload
+        run: php -r "require 'vendor/autoload.php'; echo 'autoload ok';"

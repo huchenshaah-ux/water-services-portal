@@ -33,12 +33,10 @@
     },
     "scripts": {
         "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
         ],
         "vercel": [
-            "@php -r \"foreach (['bootstrap/cache','storage/framework/cache/data','storage/framework/sessions','storage/framework/views','storage/logs'] as $d) { if (!is_dir($d)) mkdir($d, 0755, true); }\"",
-            "@php artisan package:discover --ansi"
+            "@php -r \"foreach (['bootstrap/cache','storage/framework/cache/data','storage/framework/sessions','storage/framework/views','storage/logs'] as $d) { if (!is_dir($d)) mkdir($d, 0755, true); }\""
         ]
     },
     "extra": {
