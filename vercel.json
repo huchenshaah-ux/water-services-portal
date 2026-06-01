@@ -21,9 +21,5 @@
     { "src": "/js/(.*)", "dest": "/public/js/$1" },
     { "src": "/(manifest\\.json|sw\\.js)", "dest": "/public/$1" },
     { "src": "/(.*)", "dest": "/api/index.php" }
-  ],
-  "rewrites": [
-    { "source": "/css/(.*)", "destination": "/public/css/$1" },
-    { "source": "/js/(.*)", "destination": "/public/js/$1" }
   ]
 }
