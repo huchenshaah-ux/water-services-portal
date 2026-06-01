@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        if (env('VERCEL') || env('APP_ENV') === 'production') {
+        if (env('VERCEL') || env('VERCEL_ENV') || env('APP_ENV') === 'production') {
             Request::setTrustedProxies(
                 ['*'],
                 Request::HEADER_X_FORWARDED_FOR |

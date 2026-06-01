@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\ReportApiController;
 use App\Http\Controllers\ExcelController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('applications', [ApplicationApiController::class, 'index']);
     Route::post('applications', [ApplicationApiController::class, 'store']);
     Route::put('applications/{application}', [ApplicationApiController::class, 'update']);

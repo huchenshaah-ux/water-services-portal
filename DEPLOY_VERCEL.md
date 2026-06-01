@@ -130,6 +130,20 @@ vercel.json        → PHP runtime + routes
 
 ---
 
+## Fix HTTP 500 errors
+
+Most 500s on Vercel are caused by missing env vars or wrong session/cache drivers.
+
+1. **Set `APP_KEY`** — required. Generate locally: `php artisan key:generate --show`
+2. **Use cookie sessions** — `SESSION_DRIVER=cookie` (not `database` unless migrations ran on production DB)
+3. **Use array cache** — `CACHE_STORE=array`
+4. **Set `/tmp` paths** — copy from [.env.vercel.example](.env.vercel.example)
+5. **Set `VERCEL=1`** and `APP_URL=https://water-services-portal.vercel.app`
+6. **Database** — wrong `DB_*` causes errors after login; login page should work without DB if session is `cookie`
+7. **View logs** — Vercel → Project → Deployments → your deployment → **Functions** → `api/index.php` → Logs
+
+After changing env vars, **Redeploy** (required).
+
 ## Better alternatives for Laravel
 
 If you need reliable file uploads, queues, or `artisan` on the server, prefer:
